@@ -27,7 +27,7 @@ However, we then saw that when we navigated to our current working directory, th
 
 To fix this issue, we had to download all of the data via `datalad`:
 ```bash
-# Download all data in the folder ds000201
+# Download all data in the folder ds000201 from working directory neurodesktop-storage
 datalad get ds000201
 ```
 The datafiles are very large, therefore, you can also download the data for one subject only, to try out the analyses on one subject:
@@ -36,6 +36,10 @@ The datafiles are very large, therefore, you can also download the data for one 
 cd ~/neurodesktop-storage/ds000201
 # Download data of a subfolder, e.g. for participant 9001
 datalad get sub-9001
+```
+If this does not work, you can also set the folder you want to download as your working directory, and download the contents of it like this:
+```bash
+datalad get .
 ```
 ## Tidy up the dataset structure (optional)
 We did not know yet what the ideal structure of our data folders would be, however, we already deleted some folders including data that we would not need.
