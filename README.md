@@ -58,7 +58,7 @@ Finally, we manually deleted the functional data of the remaining participants o
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/489ff2e6-8b03-48a5-b1d9-31124ae7de9c)
 
 ## Seed-based functional connectivity analysis
-We used the [Neuroimaging core website](https://https://neuroimaging-core-docs.readthedocs.io/en/latest/pages/fsl_fmri_restingstate-sbc.html), which provided us with an overview on how to create a simple seed-based connectivity analysis using `FSL`, which is also available in Neurodesk.
+We used the [Neuroimaging core website](https://neuroimaging-core-docs.readthedocs.io/en/latest/pages/fsl_fmri_restingstate-sbc.html), which provided us with an overview on how to create a simple seed-based connectivity analysis using `FSL`, which is also available in Neurodesk.
 
 ### Create seed mask of bilateral amygdala
 First of all, using `FSLeyes`, we made two activation files selecting the Left Amygdala (`AmyLeft`), and the Right Amygdala (`AmyRight`). We identified these using the `Harvard Oxford Subcortical Structural Atlas`. The brain you can see on the image is the `MNI152_T1_2mm_brain` standard brain template.
