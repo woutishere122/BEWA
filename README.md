@@ -100,6 +100,12 @@ Therefore, we tried a different approach using `3dresample`, which ended up work
 
 ### Extract mean time series for each participant
 
+We extract the time series of our amygdala by using the mask.
+
+
+
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/204a7625-efe0-43b5-952a-36f946590824)
+
 
 
 
