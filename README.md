@@ -95,6 +95,8 @@ Therefore, we tried a different approach using `3dresample`, which ended up work
 ```bash
 3dresample -input Seed/Combined_Amygdala.nii.gz -master sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -prefix Seed/mas2k.nii.gz
 ```
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/4b87b431-46dc-4a58-b1fc-ff3affe7c269)
+
 
 ### Extract mean time series for each participant
 
