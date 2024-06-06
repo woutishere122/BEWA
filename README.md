@@ -92,29 +92,32 @@ fslmaths AmyLeft_bin.nii.gz -add AmyRight_bin.nii.gz Combined_Amygdala.nii.gz
 ```
 
 ### Align seed mask to our data
-After creating our seed mask, we tested how this looked on one of our own data files. However, when doing this, we realized that the seed mask was not aligned properly with our data. As you can see on the picture below, the dimensions and dimensions of the pixels are different.
+After creating our seed mask, we tested how this looked on one of our own data files. However, when doing this, we realized that the seed mask was not aligned properly with our data. As you can see on the picture below, the dimensions of the mask and dimensions of the functional data file are different.
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/eff81335-1dc4-415e-a582-1a2d32f0a212)
 
-To fix this, we resampled the mask file to fit our brain data. We first tried this using this command:
+To fix this, we resampled the mask file to fit our brain data. We first tried this using this command, from the ds000201 directory:
 ```bash
 flirt -in Seed/Combined_Amygdala.nii.gz -ref sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -out Seed/mask.nii.gz -applyxfm
 ```
 However, this resulted in the masks not aligning properly with our data (see picture).
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/6e942632-0ef7-4f80-ba53-481f0bd2bcce)
 
-Therefore, we tried a different approach using `3dresample`, which ended up working.
+Therefore, we tried a different approach using `3dresample`, which ended up working. 
 ```bash
-3dresample -input Seed/Combined_Amygdala.nii.gz -master sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -prefix Seed/mas2k.nii.gz
+# Load correct package
+module load afni
+# Resample mask file
+3dresample -input Seed/Combined_Amygdala.nii.gz -master sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -prefix Seed/FinalMask.nii.gz
 ```
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/4b87b431-46dc-4a58-b1fc-ff3affe7c269)
 
 
 ### Extract mean time series for each participant
 
-We extract the time series of our amygdala by using the mask for each participant seperately. 
+Next, we extracted the time series of our amygdala by using the mask for each participant seperately. From the `ds000201` directory, we used this code for participant 9001:
 
 ```bash
-fslmeants -i  sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -o sub-9001_ses-1_ts.txt -m Seed/mas2k.nii.gz
+fslmeants -i  sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -o sub-9001_ses-1_ts.txt -m Seed/FinalMask.nii.gz
 ```
 We repeat this code for all participants to extract the time series of all of the sessions of all participants
 
@@ -123,6 +126,50 @@ We repeat this code for all participants to extract the time series of all of th
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Common issues
+### Error `command not found`
+This is often the case when Neurodesk was closed off and the modules still have to be loaded. To fix this issue:
+```bash
+# For example, load the fsl module
+module load fsl
+```
+
+### Not in the right working directory
+Always make sure you are in the right working directory that contains the files you want to access. You can swith to a new working directory using the command `cd`.
 
 
 
