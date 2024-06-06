@@ -114,16 +114,30 @@ module load afni
 
 ### Extract mean time series for each participant
 
-Next, we extracted the time series of our amygdala by using the mask for each participant seperately. From the `ds000201` directory, we used this code for participant 9001:
+Next, we extracted the time series of our amygdala by using the mask. In the `ds000201` directory, we created a new folder called `time-series`. We then used this code to extract the time series for each participant separately (in this case, `sub-9001`) into a `.txt` file in the `time-series` folder.
 
 ```bash
-fslmeants -i  sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -o sub-9001_ses-1_ts.txt -m Seed/FinalMask.nii.gz
+fslmeants -i  sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -o time-series/sub-9001_ses-1_ts.txt -m Seed/FinalMask.nii.gz
 ```
-We repeat this code for all participants to extract the time series of all of the sessions of all participants
+We repeat this code TWICE for each participant to extract the time series of for both sessions for each participant.
 
 
-![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/204a7625-efe0-43b5-952a-36f946590824)
+You can view the timecourse in the text file using `FSLeyes`:
 
+- Display `sub-9001_ses-1_bold.nii.gz` in `FSLeyes` (File → Add from file → `sub-9001_ses-1_bold.nii.gz`)
+
+- On the `FSLeyes` menu, click View → Time series. This displays the time series of the voxel at the crosshairs.
+
+- Move the crosshairs to other parts of the brain, or move it off the brain, so the time series is a zero-line.
+
+- Click Settings → Time series 2 → Import and select the newly created `sub-9001_ses-1_ts.txt` file.
+
+- Click OK. The timecourse of the txt file should be displayed. 
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/65a2052e-206f-4bc3-89e2-9bb92ab163d0)
+
+
+### Run the FSL FEAT First-level Analysis¶
 
 
 
