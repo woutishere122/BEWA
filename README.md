@@ -106,6 +106,10 @@ Therefore, we tried a different approach using `3dresample`, which ended up work
 
 We extract the time series of our amygdala by using the mask.
 
+```bash
+fslmeants -i  sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -o sub-9001_ses-1_ts.txt -m Seed/mas2k.nii.gz
+```
+We repeat this code for all participants to extract the time series of all of the sessions of all participants
 
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/204a7625-efe0-43b5-952a-36f946590824)
