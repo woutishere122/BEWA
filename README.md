@@ -86,18 +86,17 @@ This is what it looked like after binarizing one amygdala file:
 And after binarizing both of them:
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/2890560f-15c1-4548-acde-224c73221e7d)
 
-Finally, we combined the files for both amygdala's into one file (`Combined_Amygdala`) in the `Seed` directory.
-```bash
-fslmaths AmyLeft_bin.nii.gz -add AmyRight_bin.nii.gz Combined_Amygdala.nii.gz
-```
 
 ### Align seed mask to our data
-After creating our seed mask, we tested how this looked on one of our own data files. However, when doing this, we realized that the seed mask was not aligned properly with our data. As you can see on the picture below, the dimensions of the mask and dimensions of the functional data file are different.
+After creating our seed masks, we tested how this looked on one of our own data files. However, when doing this, we realized that the seed masks were not aligned properly with our data. As you can see on the picture below, the dimensions of the mask and dimensions of the functional data file are different.
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/eff81335-1dc4-415e-a582-1a2d32f0a212)
 
-To fix this, we resampled the mask file to fit our brain data. We first tried this using this command, from the ds000201 directory:
+To fix this, we resampled the mask file to fit our brain data. We first tried this using this command, from the `ds000201 directory`:
 ```bash
-flirt -in Seed/Combined_Amygdala.nii.gz -ref sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -out Seed/mask.nii.gz -applyxfm
+# Resample Left Amygdala mask
+flirt -in Seed/AmyLeft.nii.gz -ref sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -out Seed/LeftMask.nii.gz -applyxfm
+# Resample Right Amygdala mask
+flirt -in Seed/AmyRight.nii.gz -ref sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -out Seed/RightMask.nii.gz -applyxfm
 ```
 However, this resulted in the masks not aligning properly with our data (see picture).
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/6e942632-0ef7-4f80-ba53-481f0bd2bcce)
@@ -106,20 +105,22 @@ Therefore, we tried a different approach using `3dresample`, which ended up work
 ```bash
 # Load correct package
 module load afni
-# Resample mask file
-3dresample -input Seed/Combined_Amygdala.nii.gz -master sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -prefix Seed/FinalMask.nii.gz
+# Resample Left Amygdala mask file
+3dresample -input Seed/AmyLeft.nii.gz -master sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -prefix Seed/FinalLeftMask.nii.gz
+# Resample Right Amygdala mask file
+3dresample -input Seed/AmyRight.nii.gz -master sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -prefix Seed/FinalRightMask.nii.gz
 ```
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/4b87b431-46dc-4a58-b1fc-ff3affe7c269)
 
 
 ### Extract mean time series for each participant
 
-Next, we extracted the time series of our amygdala by using the mask. In the `ds000201` directory, we created a new folder called `time-series`. We then used this code to extract the time series for each participant separately (in this case, `sub-9001`) into a `.txt` file in the `time-series` folder.
+Next, we extracted the time series of our amygdala by using the masks. In the `ds000201` directory, we created a new folder called `time-series`. We then used this code to extract the time series for each participant separately (in this case, `sub-9001`) into a `.txt` file in the `time-series` folder. The example below is to get the time series for participant 9001 at session 1 for the left amygdala.
 
 ```bash
-fslmeants -i  sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -o time-series/sub-9001_ses-1_ts.txt -m Seed/FinalMask.nii.gz
+fslmeants -i  sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -o time-series/sub-9001_ses-1_left_ts.txt -m Seed/FinalLeftMask.nii.gz
 ```
-We repeat this code TWICE for each participant to extract the time series of for both sessions for each participant.
+We repeated this code FOUR TIMES for each participant to extract the time series of for both sessions for both the left and right amygdala for each participant.
 
 
 You can view the timecourse in the text file using `FSLeyes`:
@@ -130,15 +131,16 @@ You can view the timecourse in the text file using `FSLeyes`:
 
 - Move the crosshairs to other parts of the brain, or move it off the brain, so the time series is a zero-line.
 
-- Click Settings → Time series 2 → Import and select the newly created `sub-9001_ses-1_ts.txt` file.
+- Click Settings → Time series 2 → Import and select the newly created `sub-9001_ses-1_left_ts.txt` file.
 
 - Click OK. The timecourse of the txt file should be displayed. 
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/65a2052e-206f-4bc3-89e2-9bb92ab163d0)
+![image](https://github.com/woutishere122/BEWA/assets/120474930/1a54b5a3-f335-47bf-b8c7-c730d262ade8)
+
 
 
 ### Run the FSL FEAT First-level Analysis¶
-
+For each subject, we then ran a first level FEAT analysis showing us the brain regions that have activity correlated to the bilateral amygdala activity.
 
 
 
