@@ -140,8 +140,34 @@ You can view the timecourse in the text file using `FSLeyes`:
 
 
 ### Run the FSL FEAT First-level Analysis¶
-For each subject, we then ran a first level FEAT analysis showing us the brain regions that have activity correlated to the bilateral amygdala activity.
+For each subject, we then ran a first level FEAT analysis showing us the brain regions that have activity correlated to the bilateral amygdala activity. The instructions below will show how we did this for one subject, subject 9001.
 
+First of all, we opened `FSL` using the Unix Terminal:
+```bash
+fsl &
+```
+
+This opened up a window from which we selected `FEAT FMRI analysis`, opening up `FEAT`: the FMRI Expert Analysis Tool.
+![image](https://github.com/woutishere122/BEWA/assets/120474930/ed9dc44b-9e08-4fc4-ae84-2c159df46f0a)
+
+From this window, we selected `Select 4D data`, to upload our input data for our first participant: `sub-9001_ses-1_task-rest_bold.nii.gz`, then we pressed OK.
+
+Next, we selected `/neurodesktop-storage/ds000201/sub-9001` as our output directory to tell `FSL` to create a feat directory called sub-001.feat at the same level as the subject and seed directories. 
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/f0d068e0-0680-4d80-86f7-c02b732ac483)
+
+Next, in the Unix Terminal, check the number of volumes and repetition time of your data, to input into `FEAT` (make sure you are in the `ds000201` directory):
+```bash
+fslinfo sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz
+```
+
+In the output, `dim4` represents the amount of volumes, and `pixdim4` the repetition time. In this case, 193 and 2.5, respectively.
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/8768bcda-d992-45cf-a374-560916bfc4dd)
+
+We then filled in these numbers in `Total volumes` and `TR(s)` on the `FEAT` interface.
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/365dadb5-bda5-4535-b54b-ade13fcf2da8)
 
 
 
