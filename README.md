@@ -68,8 +68,15 @@ We used the [Neuroimaging core website](https://neuroimaging-core-docs.readthedo
 First of all, using `FSLeyes`, we made two activation files selecting the Left Amygdala (`AmyLeft`), and the Right Amygdala (`AmyRight`). We identified these using the `Harvard Oxford Subcortical Structural Atlas`. The brain you can see on the image is the `MNI152_T1_2mm_brain` standard brain template.
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/325801d3-bc7f-405a-b733-d41e03625e62)
 
-Next, we needed to binarize these files (`AmyLeft_bin` and `AmyRight_bin`). We did so in the therminal using `FSL`. 
+To save the seed image, we clicked the save symbol (green box, bottom left) next to the seed image.
+
+We saved the image as `Amygdala_Left` and `Amygdala_Right` in the `Seed` directory, a folder in our main folder `ds000201`.
+
+Next, we needed to binarize these files (`AmyLeft_bin` and `AmyRight_bin`) to be able to use them as a mask. We did so in the therminal using `FSL`. 
 ```bash
+# Go to the seed working directory
+cd ~/neurodesktop-storage/ds000201/Seed
+# Binarize the mask files
 module load fsl
 fslmaths AmyRight -thr 0.1 -bin AmyRight_bin
 fslmaths AmyLeft -thr 0.1 -bin AmyLeft_bin
@@ -79,7 +86,7 @@ This is what it looked like after binarizing one amygdala file:
 And after binarizing both of them:
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/2890560f-15c1-4548-acde-224c73221e7d)
 
-Finally, we combined the files for both amygdala's into one (`Combined_Amygdala`).
+Finally, we combined the files for both amygdala's into one file (`Combined_Amygdala`) in the `Seed` directory.
 ```bash
 fslmaths AmyLeft_bin.nii.gz -add AmyRight_bin.nii.gz Combined_Amygdala.nii.gz
 ```
@@ -104,7 +111,7 @@ Therefore, we tried a different approach using `3dresample`, which ended up work
 
 ### Extract mean time series for each participant
 
-We extract the time series of our amygdala by using the mask.
+We extract the time series of our amygdala by using the mask for each participant seperately. 
 
 ```bash
 fslmeants -i  sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz -o sub-9001_ses-1_ts.txt -m Seed/mas2k.nii.gz
