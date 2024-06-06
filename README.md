@@ -1,4 +1,4 @@
-# Case Studies in Applied Experimental Psychology
+# Case Studies in the Analysis of Experimental Data
 Documentation of an amygdala-based functional connectivity analysis using Neurodesk. We used the Terminal in Neurodesk to execute the code, as well as the interfaces of the programmes on Neurodesk (e.g. `FSL`).
 
 ## Install Neurodesktop (To do)
@@ -169,7 +169,11 @@ We then filled in these numbers in `Total volumes` and `TR(s)` on the `FEAT` int
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/365dadb5-bda5-4535-b54b-ade13fcf2da8)
 
+Next, in the `Pre-stats` tab, since the data was already preprocessed, we changed the parameters like the picture below:
 
+![image](https://github.com/woutishere122/BEWA/assets/120474930/efbbde9e-31a7-4839-8adf-702071f734ad)
+
+Then, in the `Registration` tab, 
 
 
 
