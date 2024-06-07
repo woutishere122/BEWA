@@ -137,9 +137,26 @@ You can view the timecourse in the text file using `FSLeyes`:
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/1a54b5a3-f335-47bf-b8c7-c730d262ade8)
 
+### Extract non-brain structures
+This was the point we realised that our data was not preprocessed (nothing about this could be found in the dataset description or manuscript [Dataset manuscript](https://openarchive.ki.se/xmlui/bitstream/handle/10616/45181/Manuscript_Gustav_Nilsonne_v2_2017.pdf?sequence=4&isAllowed=y)). We went to fsl using the Unix Terminal
+
+```bash
+fsl &
+```
+
+We selected `BET brain extraction`.
+
+We set the functional intensity threshold to 0.2 
+
+select input image and output directory
+
+Click `Go`.
+
+Do this for all structural images
+
 ### Run the FSL FEAT First-level Analysis¶
 
-For each subject, we then ran a first level FEAT analysis showing us the brain regions that have activity correlated to the bilateral amygdala activity. The instructions below will show how we did this for one subject (subject 9001) at session 1 for the left amygdala.
+For each subject, we then ran a first level FEAT analysis showing us the brain regions that have activity correlated to the bilateral amygdala activity. The instructions below will show how we did this for one subject (subject 9001) at session 1 for the bilateral amygdala.
 
 First of all, we opened `FSL` using the Unix Terminal:
 ```bash
@@ -149,7 +166,7 @@ fsl &
 This opened up a window from which we selected `FEAT FMRI analysis`, opening up `FEAT`: the FMRI Expert Analysis Tool.
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/ed9dc44b-9e08-4fc4-ae84-2c159df46f0a)
 
-From this window, we selected `Select 4D data`, to upload our input data for our first participant: `sub-9001_ses-1_task-rest_bold.nii.gz`, then we pressed OK.
+From this window, we selected `Select 4D data`, to upload our input data for our first participant: `sub-9001_ses-1_task-rest_bold.nii.gz`.
 
 Next, we selected `/neurodesktop-storage/ds000201/sub-9001` as our output directory to tell `FSL` to create a feat directory called sub-001.feat at the same level as the subject and seed directories. 
 
@@ -168,14 +185,17 @@ We then filled in these numbers in `Total volumes` and `TR(s)` on the `FEAT` int
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/365dadb5-bda5-4535-b54b-ade13fcf2da8)
 
-Next, in the `Pre-stats` tab, since the data was already preprocessed, we changed the parameters like the picture below:
+Next, in the `Pre-stats` tab, in order to preprocess the data, we changed the parameters like the picture below:
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/efbbde9e-31a7-4839-8adf-702071f734ad)
+![image](https://github.com/woutishere122/BEWA/assets/120474930/aff2001d-b8f3-46cf-8355-bd08aef67d78)
+
+
 
 Our data was not brain-extracted. Due to time constraints not allowing us to extract the brain for each participant, we decided to work in subject space and use the T1 weighted images for each participant. Additionally, to account for our data not being brain-extracted, we opted for 6 degrees of freedom instead of more.
 Therefore, in the `Registration` tab, we selected the T1 weighted image of participant 9001 at session 1 as main structural image, and selected `6 DOF`.
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/53b0153e-1026-4181-9bba-5bc7cdce678a)
+![image](https://github.com/woutishere122/BEWA/assets/120474930/b20943c9-4e2d-46fb-a42a-41cb875cce20)
+
 
 We then used these settings in the Stats tab, and clicked `Full model setup`.
 
@@ -186,7 +206,7 @@ This opened up a `General Linear Model` window. The GLM window is where you defi
 - Set `Number of original EVs` to 2 (one for the left amygdala, one for the right amygdala). We did this to see the combined or separate effects of the left and right amygdala on the rest of the brain.
 - We named the first EV `AmyLeft`, the second one `AmyRight`.
 - Next, we selected `Custom` (1 entry per volume) for the Basic Shape for Both EVs, to ensure that each EV is defined by its respective time series file.
-- Next to `Filename`, we selected sub-001_PCC.txt for the first EV and `` for the second EV. These are the mean time series of the left and right amygdala for sub-9001 at session 1 and are the statistical regressors in our GLM model.
+- TO DOOOO Next to `Filename`, we selected `~/neurodesktop-storage/ds000201/time_series/sub-9001_ses-1_left_ts.txt` for the first EV and `~/neurodesktop-storage/ds000201/time_series/sub-9001_ses-1_right_ts.txt` for the second EV. These are the mean time series of the left and right amygdala for sub-9001 at session 1 and are the statistical regressors in our GLM model.
 - The first-level analysis will identify brain voxels that show a significant correlation with the seed (left and right amygdala) time series data.
 - We then selected `None` for Convolution, and deactivated `Add temporal derivate` and `Apply temporal filtering`
 
