@@ -173,7 +173,16 @@ Next, in the `Pre-stats` tab, since the data was already preprocessed, we change
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/efbbde9e-31a7-4839-8adf-702071f734ad)
 
-Then, in the `Registration` tab, 
+Our data was not brain-extracted. Due to time constraints not allowing us to extract the brain for each participant, we decided to work in subject space and use the T1 weighted images for each participant. Additionally, to account for our data not being brain-extracted, we opted for 6 degrees of freedom instead of more.
+Therefore, in the `Registration` tab, we selected the T1 weighted image of participant 9001 at session 1 as main structural image, and selected `6 DOF`.
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/53b0153e-1026-4181-9bba-5bc7cdce678a)
+
+We then used these settings in the Stats tab, and clicked `Full model setup`.
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/f75ce0ac-38af-4b44-adc5-975c83b7a359)
+
+
 
 
 
