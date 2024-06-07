@@ -137,10 +137,9 @@ You can view the timecourse in the text file using `FSLeyes`:
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/1a54b5a3-f335-47bf-b8c7-c730d262ade8)
 
-
-
 ### Run the FSL FEAT First-level Analysis¶
-For each subject, we then ran a first level FEAT analysis showing us the brain regions that have activity correlated to the bilateral amygdala activity. The instructions below will show how we did this for one subject, subject 9001.
+
+For each subject, we then ran a first level FEAT analysis showing us the brain regions that have activity correlated to the bilateral amygdala activity. The instructions below will show how we did this for one subject (subject 9001) at session 1 for the left amygdala.
 
 First of all, we opened `FSL` using the Unix Terminal:
 ```bash
@@ -182,10 +181,37 @@ We then used these settings in the Stats tab, and clicked `Full model setup`.
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/f75ce0ac-38af-4b44-adc5-975c83b7a359)
 
+This opened up a `General Linear Model` window. The GLM window is where you define the parameters of your model, including explanatory variables (EVs), contrasts, and how they will be used to analyze the time series data from your fMRI scan. These are the settings we used:
 
+- Set `Number of original EVs` to 2 (one for the left amygdala, one for the right amygdala). We did this to see the combined or separate effects of the left and right amygdala on the rest of the brain.
+- We named the first EV `AmyLeft`, the second one `AmyRight`.
+- Next, we selected `Custom` (1 entry per volume) for the Basic Shape for Both EVs, to ensure that each EV is defined by its respective time series file.
+- Next to `Filename`, we selected sub-001_PCC.txt for the first EV and `` for the second EV. These are the mean time series of the left and right amygdala for sub-9001 at session 1 and are the statistical regressors in our GLM model.
+- The first-level analysis will identify brain voxels that show a significant correlation with the seed (left and right amygdala) time series data.
+- We then selected `None` for Convolution, and deactivated `Add temporal derivate` and `Apply temporal filtering`
 
+The GLM looked like this for both EVs:
 
+![image](https://github.com/woutishere122/BEWA/assets/120474930/39cb26dd-2ee5-4ab3-bb6b-7ed9519d28fc)
 
+Next, we clicked the `Contrasts & F-tests` tab, and followed these steps:
+
+- Set `Contrasts` to 2, one for each amygdala.
+- Set title `AmyLeft` and set `EV1` to one for the first contrast.
+- Set title `AmyRight` and set `EV2` to one for the second contrast.
+- Click `Done`
+
+ This displayed a blue and red design matrix, which we then closed:
+ 
+ ![image](https://github.com/woutishere122/BEWA/assets/120474930/05cd804a-19fc-4aaa-939d-b9e1af1d9f95)
+
+We then didn't change anything in the `Post-stats` tab of `FEAT`, and clicked `Go` to run the first-level analysis.
+
+We then found a newly created output folder in our chosen output directory, which included a `report`-file. When opening this report in our browser, we saw this `FEAT Report` window that indicated that the analysis was still running.
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/e26c133a-cacb-427a-958c-ea2f2cc9c7a7)
+
+After a few minutes of waiting for the analysis to finish, we could click `Post-stats`, to see the following results:
 
 
 
