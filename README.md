@@ -241,14 +241,29 @@ We then repeated this process for each participant. This took a LONG time. We tr
 ### The FSL FEAT Higher-level Analysis
 Now it was time for the group analysis across all participants. First of all, using the Metadata provided in the dataset documentation, we sorted our newly created `.feat`-files into two folders: `NormalSleep` and `SleepDeprivation`. Each participant completed two sessions, one after normal sleep and one after sleep deprivation. In case of participant 9001, the first session was conducted after normal sleep.
 
-This means that we conducted two higher-level analyses, one for the fMRI scans after normal sleep, and one for the fMRI data following sleep deprivation. These analyses rely on two things:
+This means that we conducted two higher-level analyses, one for the fMRI scans after normal sleep, and one for the fMRI data following sleep deprivation. These analyses rely on three things:
+- The specific session/condition: `normal sleep` or `sleep deprivation`
 - Each of the individual subject `FEAT` analyses 
 - A description of the `GLM model`
 
+This pipeline will illustrate how we did the higher level analysis of the `NormalSleep` condition, which is the first session of participant 9001.
+
+First of all, we started by selecting the `Higher-level analysis` in the `FEAT` – FMRI Expert Analysis Tool Window:
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/36abe32a-19b2-4dcb-bcdf-abacfde20c39)
+
 #### Select Each Individual Subject FEAT Analysis
+In the `Data` tab:
+- We selected the default option `Inputs are lower-level FEAT directories`
+- Number of inputs = 44, which is the number of `.feat`-files in the `NormalSleep` folder
 
+![image](https://github.com/woutishere122/BEWA/assets/120474930/27083d11-dd42-4eb6-ba68-152f9120b868)
 
+Then we clicked `Select FEAT directories`. A Select input data window then appeared:
 
+![image](https://github.com/woutishere122/BEWA/assets/120474930/a5919ec7-3cc0-4dbc-a0ef-f61f79f80e32)
+
+We then clicked the yellow folder on the right of each row to select the `FEAT`-folder that we previously generated for each participatn from each first-level analysis. After selecting all relevant folders, it looked like this:
 
 
 
