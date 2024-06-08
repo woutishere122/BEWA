@@ -239,6 +239,13 @@ After 15-20 minutes of waiting for the analysis to finish, we could click `Post-
 We then repeated this process for each participant. This took a LONG time. We tried running multiple analyses at once but the memory and processor could only handle a few analyses at once, or the programme would shut down and cause errors in the analyses, in which case we had to run the analysis again. Finally, after various hours, we completed all first level analyses and could move on to the higher level analysis.
 
 ### The FSL FEAT Higher-level Analysis
+Now it was time for the group analysis across all participants. First of all, using the Metadata provided in the dataset documentation, we sorted our newly created `.feat`-files into two folders: `NormalSleep` and `SleepDeprivation`. Each participant completed two sessions, one after normal sleep and one after sleep deprivation. In case of participant 9001, the first session was conducted after normal sleep.
+
+This means that we conducted two higher-level analyses, one for the fMRI scans after normal sleep, and one for the fMRI data following sleep deprivation. These analyses rely on two things:
+- Each of the individual subject `FEAT` analyses 
+- A description of the `GLM model`
+
+#### Select Each Individual Subject FEAT Analysis
 
 
 
