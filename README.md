@@ -137,26 +137,26 @@ You can view the timecourse in the text file using `FSLeyes`:
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/1a54b5a3-f335-47bf-b8c7-c730d262ade8)
 
-### Extract non-brain structures
-This was the point we realised that our data was not preprocessed (nothing about this could be found in the dataset description or manuscript [Dataset manuscript](https://openarchive.ki.se/xmlui/bitstream/handle/10616/45181/Manuscript_Gustav_Nilsonne_v2_2017.pdf?sequence=4&isAllowed=y)). We went to fsl using the Unix Terminal
+### Normalize T1 weighted structural images
+This was the point we realised that our data might not have been preprocessed (nothing about this could be found in the dataset description or manuscript [Dataset manuscript](https://openarchive.ki.se/xmlui/bitstream/handle/10616/45181/Manuscript_Gustav_Nilsonne_v2_2017.pdf?sequence=4&isAllowed=y)). 
+Due to time constraints not allowing us to fully preprocess the data and start all over again, we decided to try and save what could be saved, and  preprocesses our data while also extracting the level 1 analysis through FSL's `FEAT`. However, we first needed to normalize our structural data for this using FSL's `BET`. The example below is how we did this for participant 9001 at session 1, however we had to do this for all participants seperately.
+
+We first went to `FSL` using the Unix Terminal:
 
 ```bash
 fsl &
 ```
 
-We selected `BET brain extraction`.
+Next, we selected `BET brain extraction`.
 
-We set the functional intensity threshold to 0.2 
+In the interface that pops up, we set the functional intensity threshold to 0.2.
 
-select input image and output directory
+Next, we selected input image `/neurodesktop-storage/ds000201/sub-9001/ses-1/anat/sub-9001_ses-1_T1w` and output image `/neurodesktop-storage/ds000201/sub-9001/ses-1/anat/sub-9001_ses-1_T1w_brain` and clicked `Go`.
 
-Click `Go`.
-
-Do this for all structural images
+This created the file `sub-9001_ses-1_T1w_brain.nii.gz` in the same directory as our input image.
 
 ### Run the FSL FEAT First-level Analysis¶
-
-For each subject, we then ran a first level FEAT analysis showing us the brain regions that have activity correlated to the bilateral amygdala activity. The instructions below will show how we did this for one subject (subject 9001) at session 1 for the bilateral amygdala.
+For each subject, we then ran a first level `FEAT` analysis showing us the brain regions that have activity correlated to the bilateral amygdala activity. Simultaneously, we performed some preprocessing steps. The instructions below will show how we did this for one subject (subject 9001) at session 1 for the bilateral amygdala.
 
 First of all, we opened `FSL` using the Unix Terminal:
 ```bash
@@ -168,11 +168,11 @@ This opened up a window from which we selected `FEAT FMRI analysis`, opening up 
 
 From this window, we selected `Select 4D data`, to upload our input data for our first participant: `sub-9001_ses-1_task-rest_bold.nii.gz`.
 
-Next, we selected `/neurodesktop-storage/ds000201/sub-9001` as our output directory to tell `FSL` to create a feat directory called sub-001.feat at the same level as the subject and seed directories. 
+Next, we selected `/neurodesktop-storage/ds000201/sub-9001_1` as our output directory to tell `FSL` to create a feat directory called sub-9001_1.feat at the same level as the subject and seed directories. 
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/f0d068e0-0680-4d80-86f7-c02b732ac483)
 
-Next, in the Unix Terminal, check the number of volumes and repetition time of your data, to input into `FEAT` (make sure you are in the `ds000201` directory):
+Normally, FEAT should automatically fill out the `Total volumes` and `TR(s)`. However, if this is not the case, you can check the number of volumes and repetition time of your data using the Unix Terminal (make sure you are in the `ds000201` directory):
 ```bash
 fslinfo sub-9001/ses-1/func/sub-9001_ses-1_task-rest_bold.nii.gz
 ```
@@ -185,14 +185,11 @@ We then filled in these numbers in `Total volumes` and `TR(s)` on the `FEAT` int
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/365dadb5-bda5-4535-b54b-ade13fcf2da8)
 
-Next, in the `Pre-stats` tab, in order to preprocess the data, we changed the parameters like the picture below:
+Next, in the `Pre-stats` tab, we changed the parameters like the picture below:
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/aff2001d-b8f3-46cf-8355-bd08aef67d78)
 
-
-
-Our data was not brain-extracted. Due to time constraints not allowing us to extract the brain for each participant, we decided to work in subject space and use the T1 weighted images for each participant. Additionally, to account for our data not being brain-extracted, we opted for 6 degrees of freedom instead of more.
-Therefore, in the `Registration` tab, we selected the T1 weighted image of participant 9001 at session 1 as main structural image, and selected `6 DOF`.
+Next, in the `Registration` tab, we selected the brain-extracted (which was done previously using `BET)` T1 weighted image of participant 9001 at session 1 as `Main structural image`, together with `Full search` and `BBR`. Next, as `Standard space`, we selected the `MNI152_T1_2mm_brain template`, `Normal search` and `12 DOF`.
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/b20943c9-4e2d-46fb-a42a-41cb875cce20)
 
@@ -206,9 +203,9 @@ This opened up a `General Linear Model` window. The GLM window is where you defi
 - Set `Number of original EVs` to 2 (one for the left amygdala, one for the right amygdala). We did this to see the combined or separate effects of the left and right amygdala on the rest of the brain.
 - We named the first EV `AmyLeft`, the second one `AmyRight`.
 - Next, we selected `Custom` (1 entry per volume) for the Basic Shape for Both EVs, to ensure that each EV is defined by its respective time series file.
-- TO DOOOO Next to `Filename`, we selected `~/neurodesktop-storage/ds000201/time_series/sub-9001_ses-1_left_ts.txt` for the first EV and `~/neurodesktop-storage/ds000201/time_series/sub-9001_ses-1_right_ts.txt` for the second EV. These are the mean time series of the left and right amygdala for sub-9001 at session 1 and are the statistical regressors in our GLM model.
+- Next to `Filename`, we selected `/neurodesktop-storage/ds000201/time_series/sub-9001_ses-1_left_ts.txt` for the first EV and `/neurodesktop-storage/ds000201/time_series/sub-9001_ses-1_right_ts.txt` for the second EV. These are the mean time series of the left and right amygdala for sub-9001 at session 1 and are the statistical regressors in our GLM model.
 - The first-level analysis will identify brain voxels that show a significant correlation with the seed (left and right amygdala) time series data.
-- We then selected `None` for Convolution, and deactivated `Add temporal derivate` and `Apply temporal filtering`
+- We then selected `None` for Convolution, and deactivated `Add temporal derivate` and `Apply temporal filtering`.
 
 The GLM looked like this for both EVs:
 
@@ -231,7 +228,20 @@ We then found a newly created output folder in our chosen output directory, whic
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/e26c133a-cacb-427a-958c-ea2f2cc9c7a7)
 
-After a few minutes of waiting for the analysis to finish, we could click `Post-stats`, to see the following results:
+After 15-20 minutes of waiting for the analysis to finish, we could click `Post-stats`, to see the following results:
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/a43d5c77-84d4-4826-af4e-6181f011f104)
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/158dd6d7-72e9-482e-9f8a-9a0426a231da)
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/480a6e40-4bd9-4bc2-a462-5f4546ee3edd)
+
+
+We then repeated this process for each participant. This took a LONG time. We tried running multiple analyses at once but the memory and processor could only handle a few analyses at once, or the programme would shut down and cause errors in the analyses, in which case we had to run the analysis again. Finally, after various hours, we completed all first level analyses and could move on to the higher level analysis.
+
+### The FSL FEAT Higher-level Analysis
+
+
 
 
 
