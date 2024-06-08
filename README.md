@@ -185,13 +185,13 @@ We then filled in these numbers in `Total volumes` and `TR(s)` on the `FEAT` int
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/365dadb5-bda5-4535-b54b-ade13fcf2da8)
 
-Next, in the `Pre-stats` tab, we changed the parameters like the picture below:
+Next, in the `Pre-stats` tab, we changed the parameters like the picture below. Note that we checked `BET brain extraction` to extract only the brain structures from our functional image, as well as an interleaved `Slice timing correction` since our data was acquired using an interleaved method:
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/aff2001d-b8f3-46cf-8355-bd08aef67d78)
 
-Next, in the `Registration` tab, we selected the brain-extracted (which was done previously using `BET)` T1 weighted image of participant 9001 at session 1 as `Main structural image`, together with `Full search` and `BBR`. Next, as `Standard space`, we selected the `MNI152_T1_2mm_brain template`, `Normal search` and `12 DOF`.
+Next, in the `Registration` tab, we selected the brain-extracted (which was done previously using `BET)` T1 weighted image of participant 9001 at session 1 as `Main structural image`, together with `Full search` and `BBR`. Next, as `Standard space`, we selected the `MNI152_T1_2mm_brain template`, `Full search` and `12 DOF` to optimize the fit of the mapping.
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/b20943c9-4e2d-46fb-a42a-41cb875cce20)
+![image](https://github.com/woutishere122/BEWA/assets/120474930/fcd5c9dd-3c00-4b47-b897-96c885106e73)
 
 
 We then used these settings in the Stats tab, and clicked `Full model setup`.
@@ -235,7 +235,6 @@ After 15-20 minutes of waiting for the analysis to finish, we could click `Post-
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/158dd6d7-72e9-482e-9f8a-9a0426a231da)
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/480a6e40-4bd9-4bc2-a462-5f4546ee3edd)
-
 
 We then repeated this process for each participant. This took a LONG time. We tried running multiple analyses at once but the memory and processor could only handle a few analyses at once, or the programme would shut down and cause errors in the analyses, in which case we had to run the analysis again. Finally, after various hours, we completed all first level analyses and could move on to the higher level analysis.
 
