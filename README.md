@@ -246,7 +246,7 @@ These analyses rely on three things:
 - Each of the individual subjects first-level analyses 
 - A description of the `GLM model`
 
-This one was quite complex, since it had to include all conditions and contrasts we wanted to test. For each participant, we wanted to investigate the functional connectivity of both the left and right amygdala, before and after sleep deprivation. This resulted in 4 conditions per participant: `NS_Left` = Normal sleep, left amygdala; `NS_Right` = Normal sleep, right amygdala; `SD_Left` = Sleep deprivation, left amygdala; `SD_Right` = Sleep deprivation, right amygdala). Additionally, each participant was also assigned to either the `Low trait anxiety` or `High trait anxiety` group. With 46 participants (and 4 participants missing the data from the second fMRI recording session), this resulted in `176 input files` in total.
+This one was quite complex, since it had to include all conditions and contrasts we wanted to test. For each participant, we wanted to investigate the functional connectivity of both the left and right amygdala, before and after sleep deprivation. This resulted in 4 conditions per participant: Normal sleep, left amygdala; Normal sleep, right amygdala; Sleep deprivation, left amygdala; Sleep deprivation, right amygdala). Additionally, each participant was also assigned to either the `Low trait anxiety` or `High trait anxiety` group. With 46 participants (and 4 participants missing the data from the second fMRI recording session), this resulted in `176 input files` in total (4 per participant for each of the 4 conditions).
 
 #### Find relevant files for left and right amygdala activation
 First of all, since we did our first level analyses for the left and right amygdala simultaneously for each participant, we had to find the relevant files for the left and right amygdala separately in the `FEAT`-folders. 
@@ -284,7 +284,8 @@ We then clicked `OK` (the squished button on the bottom right).
 #### Name an Output Directory¶
 Next, we clicked the yellow folder to the right of `Output directory`, chose `/neurodesktop-storage/ds000201/HigherLevelAnalysis` and clicked `OK`.
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/180a5a61-94aa-4e19-a730-dc149b98f7ea)
+![image](https://github.com/woutishere122/BEWA/assets/120474930/544db82b-379e-4b3a-8851-4020028e810a)
+
 
 
 
@@ -292,6 +293,9 @@ WIP
 Next, on the `Stats` tab, we clicked `Full model setup`. This opened up a `General Linear Model` window, in which we named the model PCC and ensure the interface looks like this:
 
 
+Group: no different groups because we don't expect the different sessions to have different variances.
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/73d369b3-1d24-4603-a809-0a18c4cc688c)
 
 
 
