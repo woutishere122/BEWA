@@ -265,9 +265,16 @@ Then we clicked `Select FEAT directories`. A Select input data window then appea
 
 We then clicked the yellow folder on the right of each row to select the `FEAT`-folder that we previously generated for each participatn from each first-level analysis. After selecting all relevant folders, it looked like this:
 
+![image](https://github.com/woutishere122/BEWA/assets/120474930/80236d85-ca67-4ea8-8708-934c5813e65c)
 
+We then clicked `OK` (the squished button on the bottom right).
 
+#### Name an Output Directory¶
+Next, we clicked the yellow folder to the right of `Output directory`, chose `NormalSleep_group` as name for the output directory in folder `ds000201` and clicked `OK`.
 
+![image](https://github.com/woutishere122/BEWA/assets/120474930/180a5a61-94aa-4e19-a730-dc149b98f7ea)
+
+Next, on the `Stats` tab, we clicked `Full model setup`. This opened up a `General Linear Model` window, in which we named the model PCC and insure the interface looks like this:
 
 
 
