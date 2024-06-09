@@ -239,42 +239,57 @@ After 15-20 minutes of waiting for the analysis to finish, we could click `Post-
 We then repeated this process for each participant. This took a LONG time. We tried running multiple analyses at once but the memory and processor could only handle a few analyses at once, or the programme would shut down and cause errors in the analyses, in which case we had to run the analysis again. Finally, after various hours, we completed all first level analyses and could move on to the higher level analysis.
 
 ### The FSL FEAT Higher-level Analysis
-Now it was time for the group analysis across all participants. First of all, using the Metadata provided in the dataset documentation, we sorted our newly created `.feat`-files into two folders: `NormalSleep` and `SleepDeprivation`. Each participant completed two sessions, one after normal sleep and one after sleep deprivation. In case of participant 9001, the first session was conducted after normal sleep.
+Now it was time for the group analysis across all participants. 
 
-This means that we conducted two higher-level analyses, one for the fMRI scans after normal sleep, and one for the fMRI data following sleep deprivation. These analyses rely on three things:
-- The specific session/condition: `normal sleep` or `sleep deprivation`
-- Each of the individual subject `FEAT` analyses 
+These analyses rely on three things:
+- The specific conditions and explanatory variables
+- Each of the individual subjects first-level analyses 
 - A description of the `GLM model`
 
-This pipeline will illustrate how we did the higher level analysis of the `NormalSleep` condition, which is the first session of participant 9001.
+This one was quite complex, since it had to include all conditions and contrasts we wanted to test. For each participant, we wanted to investigate the functional connectivity of both the left and right amygdala, before and after sleep deprivation. This resulted in 4 conditions per participant: `NS_Left` = Normal sleep, left amygdala; `NS_Right` = Normal sleep, right amygdala; `SD_Left` = Sleep deprivation, left amygdala; `SD_Right` = Sleep deprivation, right amygdala). Additionally, each participant was also assigned to either the `Low trait anxiety` or `High trait anxiety` group. With 46 participants (and 4 participants missing the data from the second fMRI recording session), this resulted in `176 input files` in total.
 
+#### Find relevant files for left and right amygdala activation
+First of all, since we did our first level analyses for the left and right amygdala simultaneously for each participant, we had to find the relevant files for the left and right amygdala separately in the `FEAT`-folders. 
+
+When looking in the `FEAT` folders, we found `zstat1.nii.gz` for the left amygdala and `zstat2.nii.gz` for the right amygdala. These files represent the amygdala (left or right) - based functional connectivity for a specific participant, and look like this:
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/3bb910d4-ed0f-4fca-89bf-e21778c3989b)
+
+#### Prepare model
+Next, we prepared an excel file to give ourselves an overview of every file that we would have to upload to run the analysis and prevent errors (and keep our sanity). This file included the specific file we would need, as well as the coding of all explanatory variables in our second level model and looked like this:
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/c9feea5a-022f-4fc2-a5e0-cdc105604459)
+
+#### Higher-level analysis using FEAT
 First of all, we started by selecting the `Higher-level analysis` in the `FEAT` – FMRI Expert Analysis Tool Window:
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/36abe32a-19b2-4dcb-bcdf-abacfde20c39)
 
-#### Select Each Individual Subject FEAT Analysis
 In the `Data` tab:
-- We selected the default option `Inputs are lower-level FEAT directories`
-- Number of inputs = 44, which is the number of `.feat`-files in the `NormalSleep` folder
+- We selected the option `Inputs are 3D cope images from FEAT directories`
+- Number of inputs = 176
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/27083d11-dd42-4eb6-ba68-152f9120b868)
 
-Then we clicked `Select FEAT directories`. A Select input data window then appeared:
+Then we clicked `Select cope images`. A Select input data window then appeared:
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/a5919ec7-3cc0-4dbc-a0ef-f61f79f80e32)
+![image](https://github.com/woutishere122/BEWA/assets/120474930/ccaed905-f87d-44b3-a5ef-605a0516d99b)
 
-We then clicked the yellow folder on the right of each row to select the `FEAT`-folder that we previously generated for each participatn from each first-level analysis. After selecting all relevant folders, it looked like this:
+We then clicked the yellow folder on the right of each row to select the `zstat2.nii.gz`-file or `zstat2.nii.gz`-file that we previously generated for each participant from each first-level analysis. After selecting all relevant folders, it looked like this:
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/80236d85-ca67-4ea8-8708-934c5813e65c)
+INSERT PICTURE
 
 We then clicked `OK` (the squished button on the bottom right).
 
 #### Name an Output Directory¶
-Next, we clicked the yellow folder to the right of `Output directory`, chose `NormalSleep_group` as name for the output directory in folder `ds000201` and clicked `OK`.
+Next, we clicked the yellow folder to the right of `Output directory`, chose `/neurodesktop-storage/ds000201/HigherLevelAnalysis` and clicked `OK`.
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/180a5a61-94aa-4e19-a730-dc149b98f7ea)
 
-Next, on the `Stats` tab, we clicked `Full model setup`. This opened up a `General Linear Model` window, in which we named the model PCC and insure the interface looks like this:
+
+
+WIP
+Next, on the `Stats` tab, we clicked `Full model setup`. This opened up a `General Linear Model` window, in which we named the model PCC and ensure the interface looks like this:
 
 
 
