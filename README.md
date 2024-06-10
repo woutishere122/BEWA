@@ -433,10 +433,20 @@ In the Model setup wizard we selected 'two groups, unpaired' with the first grou
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/662dfd7a-dfa5-4df6-8bab-baa272bbb94c)
 
+This caused us to have 2 main EVs: 'Low trait anxiety' and 'High trait anxiety'
 
+When looking at 'Full model setup', we see these two groups. However, because our input data was not categorised in order of anxiety groups, we had to manually fill in our matrix. '1' standing for being in that group and having that explanatory variable, '0' for not having it. The 'Group' was also matched to the correct groups, in order for a more accurate statistical analyses.
 
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/079673fd-3c0d-43c6-be4a-8b78e938b5ce)
 
+For the 'Contrasts & F-tests' tab in the full model setup, we contrasted Low and High trait anxiety in both directions to see the difference between them.
 
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/9b008f6c-298a-4ca2-8728-0e47ad2e424e)
+
+Finally, in the 'Post-stats' tab, we selected a Z threshold of '2.3' and a Cluster P threshold of '0.05'
+Than, we pressed 'Go' and ran our analysis.
+
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/18aa83cf-cc64-4cb2-b7d8-c69215605fde)
 
 
 
