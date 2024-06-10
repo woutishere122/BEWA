@@ -380,7 +380,7 @@ First of all, we started by selecting the `Higher-level analysis` in the `FEAT` 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/36abe32a-19b2-4dcb-bcdf-abacfde20c39)
 
 In the `Data` tab:
-- We selected the option `Inputs are 3D cope images from FEAT directories`
+- We selected the option `Inputs are 3D cope images from FEAT directories` 
 - Number of inputs = 176
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/27083d11-dd42-4eb6-ba68-152f9120b868)
@@ -412,9 +412,26 @@ Group: no different groups because we don't expect the different sessions to hav
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/73d369b3-1d24-4603-a809-0a18c4cc688c)
 
 
+### Higher-Level analysis normal sleep only
+
+In the `Data` tab:
+- We selected the option `Inputs are 3D cope images from FEAT directories` -> caused errors, we had to do 'Inputs are lower-level FEAT directories' , which is because all of our inputs are actually lower-level FEAT directories
+- Number of inputs = 43
+- As output directory we put /neurodesktop-storage/ds000201/NormalSleepAnxietyComparison
+
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/d34aed26-caf9-419a-9dfc-0f27454cef93)
 
 
+In the 'Stats' tab:
 
+We used 'Mixed effects: FLAME 1'
+
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/bcc0311a-ad47-4088-bfef-b234469631b5)
+
+
+In the Model setup wizard we selected 'two groups, unpaired' with the first group (low anxiety) counting up to 21 people.
+
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/662dfd7a-dfa5-4df6-8bab-baa272bbb94c)
 
 
 
