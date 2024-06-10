@@ -369,9 +369,9 @@ Taking this into account, we just ended up with 43 inputs, one for each particip
 #### Prepare model
 We prepared an excel file to give ourselves an overview of every file that we would have to upload to run the analysis and prevent errors (and keep our sanity). This file included the specific file we would need, as well as the coding of the explanatory variables in our second level model and looked like this:
 
+![image](https://github.com/woutishere122/BEWA/assets/120474930/c3a95940-ffc4-45a5-abcf-9758a79bac71)
 
-
-#### Higher-level analysis using FEAT
+#### Higher-level analysis: normal sleep only
 Next, we started by selecting the `Higher-level analysis` in the `FEAT` – FMRI Expert Analysis Tool Window:
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/36abe32a-19b2-4dcb-bcdf-abacfde20c39)
@@ -401,55 +401,28 @@ Next, we clicked the yellow folder to the right of `Output directory`, chose `/n
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/d913cb53-a73e-44f6-978e-69bd71643bbb)
 
 #### General Linear Model setup
-Next, on the `Stats` tab, we clicked `Model setup wizard` and selected `two groups, unpaired` and 23 subjects in the first group.
+Next, in the `Stats` tab:
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/e1f6814f-72e6-49e9-9372-f3ecab95fe34)
-
-We then clicked `Process`, which opened up this model window. However, we will change this further in the next steps.
-
-![image](https://github.com/woutishere122/BEWA/assets/120474930/13f72672-6d3a-4431-bfb5-d28b06197334)
-
-Then, we clicked `Full model setup`. This opened up a `General Linear Model` window, in which we named the model PCC and ensure the interface looks like this:
-
-
-Group: no different groups because we don't expect the different sessions to have different variances.
-
-![image](https://github.com/woutishere122/BEWA/assets/120474930/73d369b3-1d24-4603-a809-0a18c4cc688c)
-
-
-### Higher-Level analysis normal sleep only
-
-In the `Data` tab:
-- We selected the option `Inputs are 3D cope images from FEAT directories` -> caused errors, we had to do 'Inputs are lower-level FEAT directories' , which is because all of our inputs are actually lower-level FEAT directories
-- Number of inputs = 43
-- As output directory we put /neurodesktop-storage/ds000201/NormalSleepAnxietyComparison
-
-![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/d34aed26-caf9-419a-9dfc-0f27454cef93)
-
-
-In the `Stats` tab:
-
-We used `Mixed effects: FLAME 1`
+We used the default `Mixed effects: FLAME 1`.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/bcc0311a-ad47-4088-bfef-b234469631b5)
 
-
-In the Model setup wizard we selected `two groups, unpaired` with the first group (low anxiety) counting up to 21 people.
+In the `Model setup wizard` we selected `two groups, unpaired` with the first group (low anxiety) counting up to 21 people.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/662dfd7a-dfa5-4df6-8bab-baa272bbb94c)
 
-This caused us to have 2 main EVs: `Low trait anxiety` and `High trait anxiety`
+This caused us to have 2 main EVs: `Low trait anxiety` and `High trait anxiety`.
 
-When looking at `Full model setup`, we see these two groups. However, because our input data was not categorised in order of anxiety groups, we had to manually fill in our matrix. '1' standing for being in that group and having that explanatory variable, '0' for not having it. The 'Group' was also matched to the correct groups, in order for a more accurate statistical analyses.
+When looking at `Full model setup`, we see these two groups. However, because our input data was not categorised in order of anxiety groups, we had to manually fill in our matrix. In the columns with the EVs, `1` stands for having that explanatory variable, `0` for not having it. The `Group`-column was also matched to the correct groups, with `1` for the data being collected in the first fMRI session, and `2` in the second session. 
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/079673fd-3c0d-43c6-be4a-8b78e938b5ce)
 
-For the 'Contrasts & F-tests' tab in the full model setup, we contrasted Low and High trait anxiety in both directions to see the difference between them.
+For the `Contrasts & F-tests` tab in the full model setup, we contrasted Low and High trait anxiety in both directions to see the difference between them. Furthermore, we included the main effects of both groups as well (contrast 3 and 4).
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/9b008f6c-298a-4ca2-8728-0e47ad2e424e)
 
-Finally, in the 'Post-stats' tab, we selected a Z threshold of '2.3' and a Cluster P threshold of '0.05'
-Than, we pressed 'Go' and ran our analysis.
+Finally, in the `Post-stats` tab, we selected a Z threshold of `2.3` and a Cluster P threshold of `0.05`.
+Then, we pressed `Go` and ran our analysis.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/18aa83cf-cc64-4cb2-b7d8-c69215605fde)
 
