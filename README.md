@@ -11,7 +11,10 @@ We downloaded Docker Desktop for Windows, and installed it on our computers. We 
 docker --version
 docker run hello-world
 ```
-In the Docker Desktop application, a container started running, ensuring us that Docker was working properly.
+In the Docker Desktop application, a container called `neurodeskapp` started running, ensuring us that Docker was working properly:
+
+![image](https://github.com/woutishere122/BEWA/assets/120474930/ade7e5f0-fe17-4056-8469-544a9091e500)
+
 
 ### Open Neurodesk
 Afterwards, we installed the Neurodesk app with the `Windows Installer`. When accepting the license agreement, it started to download. When the installation was complete, we launched the `Neurodesk app`.
