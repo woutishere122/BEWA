@@ -360,51 +360,56 @@ These analyses rely on three things:
 - Each of the individual subjects first-level analyses 
 - A description of the `GLM model`
 
-This one was quite complex, since it had to include all conditions and contrasts we wanted to test. For each participant, we wanted to investigate the functional connectivity of both the left and right amygdala, before and after sleep deprivation. This resulted in 4 conditions per participant: Normal sleep, left amygdala; Normal sleep, right amygdala; Sleep deprivation, left amygdala; Sleep deprivation, right amygdala). Additionally, each participant was also assigned to either the `Low trait anxiety` or `High trait anxiety` group. With 46 participants (and 4 participants missing the data from the second fMRI recording session), this resulted in `176 input files` in total (4 per participant for each of the 4 conditions).
+This one was quite complex, since it had to include all conditions and contrasts we wanted to test. For each participant, we wanted to investigate the functional connectivity of both the left and right amygdala, before and after sleep deprivation. 
 
-#### Find relevant files for left and right amygdala activation
-First of all, since we did our first level analyses for the left and right amygdala simultaneously for each participant, we had to find the relevant files for the left and right amygdala separately in the `FEAT`-folders. 
+First of all, we thought this would result in 4 conditions per participant: Normal sleep, left amygdala; Normal sleep, right amygdala; Sleep deprivation, left amygdala; Sleep deprivation, right amygdala). However, we later found out that the effect of the left and right amygdala was already embedded into our first-level analysis, and that we did not need to include this in our second-level analysis anymore. Furthermore, due to time constraints, we decided not to include the effect of sleep condition, and only focus on the fMRI scans following a normal night of sleep. 
 
-When looking in the `FEAT` folders, we found `zstat1.nii.gz` for the left amygdala and `zstat2.nii.gz` for the right amygdala. These files represent the amygdala (left or right) - based functional connectivity for a specific participant, and look like this:
-
-![image](https://github.com/woutishere122/BEWA/assets/120474930/3bb910d4-ed0f-4fca-89bf-e21778c3989b)
+Taking this into account, we just ended up with 43 inputs, one for each participant. Additionally, we had to make the distinction between low and high trait anxiety between participants, resulting in two explanatory variables.
 
 #### Prepare model
-Next, we prepared an excel file to give ourselves an overview of every file that we would have to upload to run the analysis and prevent errors (and keep our sanity). This file included the specific file we would need, as well as the coding of all explanatory variables in our second level model and looked like this:
+We prepared an excel file to give ourselves an overview of every file that we would have to upload to run the analysis and prevent errors (and keep our sanity). This file included the specific file we would need, as well as the coding of the explanatory variables in our second level model and looked like this:
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/c9feea5a-022f-4fc2-a5e0-cdc105604459)
+
 
 #### Higher-level analysis using FEAT
-First of all, we started by selecting the `Higher-level analysis` in the `FEAT` – FMRI Expert Analysis Tool Window:
+Next, we started by selecting the `Higher-level analysis` in the `FEAT` – FMRI Expert Analysis Tool Window:
 
 ![image](https://github.com/woutishere122/BEWA/assets/120474930/36abe32a-19b2-4dcb-bcdf-abacfde20c39)
 
+In case this is not opened anymore, you can open it via the terminal:
+```bash
+fsl &
+```
+
 In the `Data` tab:
-- We selected the option `Inputs are 3D cope images from FEAT directories` 
-- Number of inputs = 176
+- We selected the option `Inputs are lower-level FEAT directories`
+- Number of inputs = 43
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/27083d11-dd42-4eb6-ba68-152f9120b868)
+![image](https://github.com/woutishere122/BEWA/assets/120474930/5adf23aa-e847-4aa7-b5f5-386f0d198ce7)
 
-Then we clicked `Select cope images`. A Select input data window then appeared:
+Then we clicked `Select FEAT directories`. A Select input data window then appeared.
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/ccaed905-f87d-44b3-a5ef-605a0516d99b)
+We then clicked the yellow folder on the right of each row to select the `.feat`-file that we previously generated for each participant from each first-level analysis. After selecting all relevant folders, it looked like this:
 
-We then clicked the yellow folder on the right of each row to select the `zstat2.nii.gz`-file or `zstat2.nii.gz`-file that we previously generated for each participant from each first-level analysis. After selecting all relevant folders, it looked like this:
-
-INSERT PICTURE
+![image](https://github.com/woutishere122/BEWA/assets/120474930/20492eff-7e4b-42ef-8893-88bd75711265)
 
 We then clicked `OK` (the squished button on the bottom right).
 
 #### Name an Output Directory¶
-Next, we clicked the yellow folder to the right of `Output directory`, chose `/neurodesktop-storage/ds000201/HigherLevelAnalysis` and clicked `OK`.
+Next, we clicked the yellow folder to the right of `Output directory`, chose `/neurodesktop-storage/ds000201/NormalSleepAnxietyComparison` and clicked `OK`.
 
-![image](https://github.com/woutishere122/BEWA/assets/120474930/544db82b-379e-4b3a-8851-4020028e810a)
+![image](https://github.com/woutishere122/BEWA/assets/120474930/d913cb53-a73e-44f6-978e-69bd71643bbb)
 
+#### General Linear Model setup
+Next, on the `Stats` tab, we clicked `Model setup wizard` and selected `two groups, unpaired` and 23 subjects in the first group.
 
+![image](https://github.com/woutishere122/BEWA/assets/120474930/e1f6814f-72e6-49e9-9372-f3ecab95fe34)
 
+We then clicked `Process`, which opened up this model window. However, we will change this further in the next steps.
 
-WIP
-Next, on the `Stats` tab, we clicked `Full model setup`. This opened up a `General Linear Model` window, in which we named the model PCC and ensure the interface looks like this:
+![image](https://github.com/woutishere122/BEWA/assets/120474930/13f72672-6d3a-4431-bfb5-d28b06197334)
+
+Then, we clicked `Full model setup`. This opened up a `General Linear Model` window, in which we named the model PCC and ensure the interface looks like this:
 
 
 Group: no different groups because we don't expect the different sessions to have different variances.
@@ -422,20 +427,20 @@ In the `Data` tab:
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/d34aed26-caf9-419a-9dfc-0f27454cef93)
 
 
-In the 'Stats' tab:
+In the `Stats` tab:
 
-We used 'Mixed effects: FLAME 1'
+We used `Mixed effects: FLAME 1`
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/bcc0311a-ad47-4088-bfef-b234469631b5)
 
 
-In the Model setup wizard we selected 'two groups, unpaired' with the first group (low anxiety) counting up to 21 people.
+In the Model setup wizard we selected `two groups, unpaired` with the first group (low anxiety) counting up to 21 people.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/662dfd7a-dfa5-4df6-8bab-baa272bbb94c)
 
-This caused us to have 2 main EVs: 'Low trait anxiety' and 'High trait anxiety'
+This caused us to have 2 main EVs: `Low trait anxiety` and `High trait anxiety`
 
-When looking at 'Full model setup', we see these two groups. However, because our input data was not categorised in order of anxiety groups, we had to manually fill in our matrix. '1' standing for being in that group and having that explanatory variable, '0' for not having it. The 'Group' was also matched to the correct groups, in order for a more accurate statistical analyses.
+When looking at `Full model setup`, we see these two groups. However, because our input data was not categorised in order of anxiety groups, we had to manually fill in our matrix. '1' standing for being in that group and having that explanatory variable, '0' for not having it. The 'Group' was also matched to the correct groups, in order for a more accurate statistical analyses.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/079673fd-3c0d-43c6-be4a-8b78e938b5ce)
 
@@ -461,7 +466,7 @@ Than, we pressed 'Go' and ran our analysis.
 
 ## Common issues
 ### Error `command not found`
-This is often the case when Neurodesk was closed off and the modules still have to be loaded. To fix this issue:
+This is often the case when Neurodesk or the Unix terminal was closed off and the modules still have to be loaded. To fix this issue:
 ```bash
 # For example, load the fsl module
 module load fsl
