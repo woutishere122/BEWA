@@ -20,7 +20,7 @@ In the Docker Desktop application, a container called `neurodeskapp` started run
 Afterwards, we installed the Neurodesk app with the `Windows Installer`. When accepting the license agreement, it started to download. When the installation was complete, we launched the `Neurodesk app`.
 
 #### Pitfall when trying to open Neurodesk and redownloading Docker Desktop
-Normally, setting up takes a couple of minutes, after which you are forwarded to the Welcome page. However, this didn't work for one of us. We read that uninstalling Docker Desktop could fix this issue, but there was no uninstaller in the files, so we decided to manually delete them. This was a big mistake, installing the Docker Desktop app didn't work, as it said it was already installed. After multiple attempts, we found a [website](https://docs.docker.com/desktop/uninstall/) that gave us instructions and places where to find residual files, so we could remove all files linked to Docker Desktop. 
+Normally, setting up takes a couple of minutes, after which you are forwarded to the Welcome page. However, this didn't work for one of us. We read that uninstalling and then reinstalling Docker Desktop could fix this issue, but there was no uninstaller in the files. Therefore, we decided to manually delete them. This was a big mistake: installing the Docker Desktop app didn't work, as it said it was already installed. After multiple attempts, we found a [website](https://docs.docker.com/desktop/uninstall/) that gave us instructions and places where to find residual files, so we could remove all files linked to Docker Desktop. 
 
 However, this still didn't fix the issue. We had to go to the registery of the computer, and delete all things Docker-related in order to finally fix this issue.
 
