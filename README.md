@@ -1,24 +1,28 @@
 # Case Studies in the Analysis of Experimental Data
 Documentation of an amygdala-based functional connectivity analysis using Neurodesk. We used the Terminal in Neurodesk to execute the code, as well as the interfaces of the programmes on Neurodesk (e.g. `FSL`).
 
-## Install Neurodesktop (To do)
-We had to install Neurodesktop to analyse and preprocess the fMRI data. However, we first had to install Docker Desktop for Windows. We followed the instructions on the Neurodesk website. https://www.neurodesk.org/docs/getting-started/neurodesktop/neurodeskapp/
+## Install Neurodesk
+We had to install `Neurodesktop` to analyse and preprocess the fMRI data. However, we first had to install `Docker Desktop` for Windows. We followed the instructions on the [Neurodesk website](https://www.neurodesk.org/docs/getting-started/neurodesktop/neurodeskapp/).
 
-We downloaded Docker Desktop for Windows, and installed it on our computers. We made a profile so we could acces the application. After Docker Desktop was installed, we opened the command prompt in Windows an ran the following command to test that Docker was working correctly.
+### Install Docker Desktop
+We downloaded Docker Desktop for Windows, and installed it on our computers. We made a profile so we could access the application. After Docker Desktop was installed, we opened the command prompt in Windows an ran the following command in the Windows terminal to test that Docker was working correctly.
 
-```
+```bash
 docker --version
 docker run hello-world
-````
+```
 In the Docker Desktop application, a container started running, ensuring us that Docker was working properly.
 
-Afterwards, we installed the Neurodesk app with the Windows Installer. When accepting the license agreement, it started to download. When the installation was complete, we launched the Neurodesk app.
+### Open Neurodesk
+Afterwards, we installed the Neurodesk app with the `Windows Installer`. When accepting the license agreement, it started to download. When the installation was complete, we launched the `Neurodesk app`.
 
-Normally it sets up for a couple of minute, and you than are forwarded to the Welcome page, however, this didn't work for one of us. We read that uninstalling Docker Desktop could fix this issue, but there was no uninstaller in the files, so we decided to manually delete them. This was a big mistake, installing the Docker Desktop app didn't work, as it said it was already installed. After multiple attempts, we found a website that gave us instructions and places where to find residual files, so we could remove them. https://docs.docker.com/desktop/uninstall/
+#### Pitfall when trying to open Neurodesk and redownloading Docker Desktop
+Normally, setting up takes a couple of minutes, after which you are forwarded to the Welcome page. However, this didn't work for one of us. We read that uninstalling Docker Desktop could fix this issue, but there was no uninstaller in the files, so we decided to manually delete them. This was a big mistake, installing the Docker Desktop app didn't work, as it said it was already installed. After multiple attempts, we found a [website](https://docs.docker.com/desktop/uninstall/) that gave us instructions and places where to find residual files, so we could remove all files linked to Docker Desktop. 
 
-However, this still didn't fix the issue. We had to go to the registary of the computer, and delete all things docker related in order to finally fix this issue.
+However, this still didn't fix the issue. We had to go to the registery of the computer, and delete all things Docker-related in order to finally fix this issue.
 
-Continuation of Neurodesk. We opened "a local neurodesk" on the Welcome page. There, we were greeted by a launcher, where you could open a Neurodesktop from. We opened it and chose the Desktop Dynamic-Resolution (RDP) option. This opened a linux desktop with a lot of fMRI application in it. Than, we started looking how to download our dataset.
+### Setting up Neurodesk
+After fixing all Docker-related issues, we opened `a local neurodesk` on the Welcome page of Neurodesk. There, we were greeted by a launcher called `JupyterLab`, where you could open `Neurodesktop` from. We opened it and chose the `Desktop Dynamic-Resolution (RDP)` option. This opened `Neurodesk`, which essentially is a `Linux desktop` containing various fMRI applications in it, and we were ready to go.
 
 ## Download dataset
 downloading all the necessary files was time-consuming. Therefore, we installed `datalad`, a data management tool to efficiently handle large-scale datasets. This code allowed us to download the dataset using the Neurodesk terminal, making the data available on our own Windows system, as well as on Neurodesk.
