@@ -282,6 +282,41 @@ do
   cd ../..
 done
 ```
+For the sake of trying to be efficient, we also made a script that goes in the reversed order. In that way, one of us could start at the start, and one at the end and we could work our ways toward each other.
+
+```bash
+# Reverse order
+for feat_dir in $(ls -1 NormalSleep | sort -r)
+do
+  feat_dir="NormalSleep/${feat_dir}"
+  echo "Processing $feat_dir"
+  
+  # Navigate to the FEAT directory
+  cd $feat_dir
+  
+  # Load the design file
+  feat design.fsf
+  
+  # Navigate back to the parent directory
+  cd ../..
+done
+
+for feat_dir in $(ls -1 SleepDeprivation | sort -r)
+do
+  feat_dir="SleepDeprivation/${feat_dir}"
+  echo "Processing $feat_dir"
+  
+  # Navigate to the FEAT directory
+  cd $feat_dir
+  
+  # Load the design file
+  feat design.fsf
+  
+  # Navigate back to the parent directory
+  cd ../..
+done
+```
+
 Next, we clicked `Save` in the text editor and closed it.
 
 In the terminal, we then had to make this script executable in the following way:
