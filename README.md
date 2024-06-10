@@ -238,6 +238,63 @@ After 15-20 minutes of waiting for the analysis to finish, we could click `Post-
 
 We then repeated this process for each participant. This took a LONG time. We tried running multiple analyses at once but the memory and processor could only handle a few analyses at once, or the programme would shut down and cause errors in the analyses, in which case we had to run the analysis again. Finally, after various hours, we completed all first level analyses and could move on to the higher level analysis.
 
+#### Pitfall: Registration not done correctly
+When trying to conduct our second level analysis, we found out that because we were running multiple first-level analyses at once, the registration process was not done correctly. Therefore, we had to run almost all of our first-level analyses again. However, this time, we decided to make a bash script for it to automatize the process. 
+
+This is what we did in the Unix terminal:
+```bash
+# Set working directory
+cd /neurodesktop-storage/ds000201
+# Make a .sh script in geditor
+gedit first-level-analysis.sh
+```
+This opened up a text editor to make a script. We used the following code:
+```bash
+#!/bin/bash
+
+for feat_dir in NormalSleep/*/
+do
+  feat_dir=${feat_dir%*/}
+  echo "Processing $feat_dir"
+  
+  # Navigate to the FEAT directory
+  cd $feat_dir
+  
+  # Load the design file
+  feat design.fsf
+  
+  # Navigate back to the parent directory
+  cd ../..
+done
+
+for feat_dir in SleepDeprivation/*/
+do
+  feat_dir=${feat_dir%*/}
+  echo "Processing $feat_dir"
+  
+  # Navigate to the FEAT directory
+  cd $feat_dir
+  
+  # Load the design file
+  feat design.fsf
+  
+  # Navigate back to the parent directory
+  cd ../..
+done
+```
+Next, we clicked `Save` in the text editor and closed it.
+
+In the terminal, we then had to make this script executable in the following way:
+
+```bash
+chmod u+x first-level-analysis.sh
+```
+
+Finally, we executed the script. This script runs all `FEAT`-analyses consecutively for subfolders `NormalSleep` and `SleepDeprivation`.
+```bash
+./first-level-analysis.sh
+```
+
 ### The FSL FEAT Higher-level Analysis
 Now it was time for the group analysis across all participants. 
 
