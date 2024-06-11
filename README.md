@@ -409,7 +409,7 @@ We used the default `Mixed effects: FLAME 1`.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/bcc0311a-ad47-4088-bfef-b234469631b5)
 
-In the `Model setup wizard` we selected `two groups, unpaired` with the first group (low anxiety) counting up to 21 people.
+In the `Model setup wizard` we selected `two groups, unpaired` with the first group (low anxiety) counting up to 23 people.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/662dfd7a-dfa5-4df6-8bab-baa272bbb94c)
 
