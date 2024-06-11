@@ -68,9 +68,9 @@ We did not know yet what the ideal structure of our data folders would be, howev
 
 ```bash
 # Delete all subfolders 'fmap' in ds000201
-find "~/neurodesktop-storage/ds000201" -type d -name "fmap" -exec rm -rf {} +
+find "/neurodesktop-storage/ds000201" -type d -name "fmap" -exec rm -rf {} +
 # Delete all subfolders 'dwi' in ds000201
-find "~/neurodesktop-storage/ds000201" -type d -name "dwi" -exec rm -rf {} +
+find "/neurodesktop-storage/ds000201" -type d -name "dwi" -exec rm -rf {} +
 ```
 Next, we deleted the folders of the participants we would not be using.
 ```bash
