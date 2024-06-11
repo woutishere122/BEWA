@@ -308,6 +308,8 @@ For the sake of trying to be efficient, we also made a script that goes in the r
 
 ```bash
 # Reverse order
+#!/bin/bash
+
 for feat_dir in $(ls -1 NormalSleep | sort -r)
 do
   feat_dir="NormalSleep/${feat_dir}"
