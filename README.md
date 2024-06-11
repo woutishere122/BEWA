@@ -469,6 +469,13 @@ However, when an error message immediatly popped up, saying we had incomplete re
 
 We reran all the lower-level analysis for the `Normal sleep` resting state data. When this was finished, we ran our first analysis again.
 
+## Results
+
+This is an example image out of our report.
+
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/d798e292-c5e7-4c85-bfc4-8310f1c4b213)
+
+We talk about these results further in the paper. Congrats! You have reached the end of our markdown :D !
 
 ## Common issues
 ### Error `command not found`
