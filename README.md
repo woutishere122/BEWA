@@ -170,6 +170,7 @@ fsl &
 ```
 
 Next, we selected `BET brain extraction`.
+Dear professor, if you read this: thank you for the pizza!
 
 In the interface that pops up, we set the functional intensity threshold to 0.2.
 
