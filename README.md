@@ -405,7 +405,7 @@ Next, we clicked the yellow folder to the right of `Output directory`, chose `/n
 #### General Linear Model setup
 Next, in the `Stats` tab:
 
-We used the default `Mixed effects: FLAME 1`.
+We used the default `Mixed effects: FLAME 1`. We use FLAME 1 in FSL for mixed effects modeling when for a robust, efficient, and accurate analysis that balances sensitivity and specificity. It is particularly suitable for typical fMRI studies with small to moderate sample sizes and provides reliable variance estimation and outlier handling. For most higher-level fMRI analyses, FLAME 1 offers a practical and effective approach.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/bcc0311a-ad47-4088-bfef-b234469631b5)
 
@@ -413,30 +413,60 @@ In the `Model setup wizard` we selected `two groups, unpaired` with the first gr
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/662dfd7a-dfa5-4df6-8bab-baa272bbb94c)
 
-This caused us to have 2 main EVs: `Low trait anxiety` and `High trait anxiety`.
+This caused us to have 2 main EVs, which we called: `Low trait anxiety` and `High trait anxiety`.
 
-When looking at `Full model setup`, we see these two groups. However, because our input data was not categorised in order of anxiety groups, we had to manually fill in our matrix. In the columns with the EVs, `1` stands for having that explanatory variable, `0` for not having it. The `Group`-column was also matched to the correct groups, with `1` for the data being collected in the first fMRI session, and `2` in the second session. 
+When looking at `Full model setup`, we see these two groups. However, because our input data was not categorised in order of anxiety groups, we had to manually fill in our matrix. In the columns with the EVs, `1` stands for having that explanatory variable, `0` for not having it. The `Group`-column was also matched to this, with `1` for having a low trait anxiety and 2 having a high trait anxiety.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/079673fd-3c0d-43c6-be4a-8b78e938b5ce)
 
-For the `Contrasts & F-tests` tab in the full model setup, we contrasted Low and High trait anxiety in both directions to see the difference between them. Furthermore, we included the main effects of both groups as well (contrast 3 and 4).
+For the `Contrasts & F-tests` tab in the full model setup, we contrasted Low and High trait anxiety in both directions to see the difference between them [1 -1] [-1 1]. Furthermore, we included the main effects of both groups as well (contrast 3 and 4, [1 0] [0 1]).
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/9b008f6c-298a-4ca2-8728-0e47ad2e424e)
 
-Finally, in the `Post-stats` tab, we selected a Z threshold of `2.3` and a Cluster P threshold of `0.05`.
+Finally, in the `Post-stats` tab, we selected a Z threshold of `2.3` and a Cluster P threshold of `0.05`. By using a Z-value of `2.3`, researchers can effectively detect significant brain activations while controlling for false positives, making their findings robust and reliable.
 Then, we pressed `Go` and ran our analysis.
 
 ![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/18aa83cf-cc64-4cb2-b7d8-c69215605fde)
 
+The analysis ran, however, no differences between our `Trait anxiety groups` was found. We realised that, because one of us run the brain anatomy extraction for the first half of the participants, and the other the second half, that our lower-level analysis had too little data again, as we ran this reverse, meaning we both ran the lower-level analysis for the participants where we did not have the anatomical brains extracted for. This meant that our functional brain was mapped directly to the standart brain template, without being mapped to their anatomical brain first. This could cause relevant and significant brain activity to get lost. Realizing this, we started generating the anatomical brain extraction for all participants.
 
+### Second analyses
+Additionally, we wanted to run a second analyses which included both the `normal sleep` and the `sleep deprived` conditions. 
 
+In the `Data` tab:
+- We selected the option `Inputs are lower-level FEAT directories`
+- Number of inputs = 88
 
+#### General Linear Model setup
+Next, in the `Stats` tab:
 
+We used the default `Mixed effects: FLAME 1`. 
 
+In the `Model setup wizard` we selected `two groups, unpaired` with the first group (low anxiety) counting up to 23 people.
 
+This caused us to have 2 main EVs, which we called: `Low trait anxiety` and `High trait anxiety`. 
+When looking at `Full model setup`, we see these two groups. However, because our input data was not categorised in order of anxiety groups, we had to manually fill in our matrix. In the columns with the EVs, `1` stands for having that explanatory variable, `0` for not having it. The `Group`-column was also matched to this, with `1` for having a low trait anxiety and 2 having a high trait anxiety.
 
+Additionally, we added 3 EVs: `Normal sleep`, `Sleep Deprived`, and `Interaction`
 
+`Normal Sleep` stands for the resting state fMRI session where people had slept normally the night before. `Sleep Deprived` stands for the resting state fMRI session where people slept less than normal the night before. `Interaction` stands for the interaction between someones trait anxiety and their sleep condition. We filled in a `1` if the condition was appliccable for the data. 
 
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/47d3c696-ff18-4963-aa60-74f73d8111e3)
+
+For the Contrasts, we compared the `Trait anxiety groups` [1 -1 0 0 0], the difference between `Trait anxiety groups` between `Normal sleep` and `Deprived sleep` [1 -1 1 -1 0] [1 -1 -1 1 0]. A F-test checked for all 3 contrasts.
+
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/8234a9db-63f5-4ec1-9d30-4f80a4a02ad4)
+
+Finally, in the `Post-stats` tab, we selected a Z threshold of `2.3` and a Cluster P threshold of `0.05`. By using a Z-value of `2.3`, researchers can effectively detect significant brain activations while controlling for false positives, making their findings robust and reliable.
+Then, we pressed `Go` and ran our analysis.
+
+![afbeelding](https://github.com/woutishere122/BEWA/assets/167521585/11902ed0-d4b8-4ee7-81f0-628c114dd8f0)
+
+However, when an error message immediatly popped up, saying we had incomplete registeries. It seems that our new method for doing the lower-level analysis made the same registration errors as before for one of us who ran it. This meant, due to time contraints, that we could not run all of the lower-level analysis again. We decided to prioritize the `Normal sleep` analysis, as this would cut the lower-level analysis time in half.
+
+### Final analysis, normal sleep only
+
+We reran all the lower-level analysis for the `Normal sleep` resting state data. When this was finished, we ran our first analysis again.
 
 
 ## Common issues
